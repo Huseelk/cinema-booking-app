@@ -1,0 +1,31 @@
+<div class="app-container">
+  <header class="app-header">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span class="app-title">
+          <mat-icon>theaters</mat-icon>
+          Cinema Booking
+        </span>
+        <span class="spacer"></span>
+        <nav class="nav-links">
+          <a mat-button routerLink="/rooms" routerLinkActive="active">Rooms</a>
+          <a mat-button routerLink="/bookings" routerLinkActive="active">My Bookings</a>
+        </nav>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </header>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>&copy; 2024 Cinema Booking App. All rights reserved.</span>
+        <span class="spacer"></span>
+        <span>Built with Angular & Material Design</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </footer>
+</div>
