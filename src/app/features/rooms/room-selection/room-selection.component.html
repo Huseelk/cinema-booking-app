@@ -1,0 +1,97 @@
+<div class="room-selection-container">
+  <div class="header-section">
+    <button mat-icon-button (click)="onBackToShowtimes()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-content">
+      <h2>{{ getMovieTitle() }}</h2>
+      <div class="showtime-info" *ngIf="showtime()">
+        <div class="room-info">
+          <div class="room-color-indicator" [style.background-color]="selectedRoom()?.color"></div>
+          <span>{{ selectedRoom()?.name }}</span>
+        </div>
+        <div class="time-info">{{ getShowtimeInfo() }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage()">
+    <div class="error-text">{{ errorMessage() }}</div>
+  </div>
+
+  <div class="warning-message" *ngIf="selectionWarning()">
+    <div class="warning-text">{{ selectionWarning() }}</div>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading()">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading seat information...</p>
+  </div>
+
+  <form
+    [formGroup]="bookingForm"
+    (ngSubmit)="onBookSeats()"
+    *ngIf="!isLoading() && !errorMessage() && selectedRoom()"
+  >
+    <div class="seat-selection">
+      <h3>Select Your Seats</h3>
+
+      <div class="seat-legend">
+        <div class="legend-item">
+          <div class="seat-demo seat-available"></div>
+          <span>Available</span>
+        </div>
+        <div class="legend-item">
+          <div class="seat-demo seat-selected"></div>
+          <span>Selected</span>
+        </div>
+        <div class="legend-item">
+          <div class="seat-demo seat-booked"></div>
+          <span>Booked</span>
+        </div>
+      </div>
+
+      <div class="seat-grid-container">
+        <div class="screen-label">SCREEN</div>
+        <mat-grid-list [cols]="getGridCols()" rowHeight="60px" gutterSize="8px">
+          <mat-grid-tile *ngFor="let seat of availableSeats(); let i = index">
+            <div
+              class="seat"
+              [class]="getSeatClass(seat, i)"
+              [class.clickable]="isSeatAvailable(seat)"
+              [class.seat-disabled]="!isSeatAvailable(seat)"
+              (click)="toggleSeat(i)"
+              [title]="seat.seatId + (seat.isAvailable ? ' - Available' : ' - Booked')"
+            >
+              {{ seat.seatId }}
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div class="booking-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!selectedSeats().length || isBooking()"
+          class="book-button"
+        >
+          <mat-spinner *ngIf="isBooking()" diameter="20" class="button-spinner"></mat-spinner>
+          <span *ngIf="!isBooking()">Book Selected Seats</span>
+          <span *ngIf="isBooking()">Booking...</span>
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          (click)="onBackToShowtimes()"
+          [disabled]="isBooking()"
+          class="back-button"
+        >
+          Back to Showtimes
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
