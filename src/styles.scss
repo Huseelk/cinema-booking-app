@@ -2,29 +2,26 @@ html, body { height: 100%; }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.success-snackbar {
-  background-color: #4caf50 !important;
-  color: white !important;
-  
-  .mat-simple-snackbar-action {
-    color: white !important;
-  }
+.mat-mdc-snack-bar-container.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+.mat-mdc-snack-bar-container.success-snackbar .mdc-button {
+  color: #fff;
 }
 
-.warning-snackbar {
-  background-color: #ff9800 !important;
-  color: white !important;
-  
-  .mat-simple-snackbar-action {
-    color: white !important;
-  }
+.mat-mdc-snack-bar-container.warning-snackbar {
+  --mdc-snackbar-container-color: #ff9800;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+.mat-mdc-snack-bar-container.warning-snackbar .mdc-button {
+  color: #fff;
 }
 
-.error-snackbar {
-  background-color: #f44336 !important;
-  color: white !important;
-  
-  .mat-simple-snackbar-action {
-    color: white !important;
-  }
+.mat-mdc-snack-bar-container.error-snackbar {
+  --mdc-snackbar-container-color: #f44336;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+.mat-mdc-snack-bar-container.error-snackbar .mdc-button {
+  color: #fff;
 }
