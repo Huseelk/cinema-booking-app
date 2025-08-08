@@ -62,11 +62,15 @@
     "overrides": [
       {
         "files": "*.html",
-        "options": { "parser": "angular" }
+        "options": {
+          "parser": "angular"
+        }
       },
       {
         "files": "*.scss",
-        "options": { "singleQuote": true }
+        "options": {
+          "singleQuote": true
+        }
       }
     ]
   }
