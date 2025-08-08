@@ -1,0 +1,115 @@
+<div class="movie-list-container">
+  <div class="header-section">
+    <button mat-icon-button (click)="onBackToRooms()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-content">
+      <h1 class="page-title">
+        <span *ngIf="selectedRoom()">{{ selectedRoom()!.name }}</span>
+        <span *ngIf="!selectedRoom()">Room</span>
+        Showtimes
+      </h1>
+      <div *ngIf="selectedRoom()" class="room-info">
+        <div class="room-color-indicator" [style.background-color]="selectedRoom()!.color"></div>
+        <span>{{ selectedRoom()!.rows }}×{{ selectedRoom()!.seatsPerRow }} seating</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading()" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading showtimes...</p>
+  </div>
+
+  <div *ngIf="errorMessage() && !isLoading()" class="error-container">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3>Oops! Something went wrong</h3>
+    <p>{{ errorMessage() }}</p>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Try Again
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading() && !errorMessage()" class="showtimes-grid">
+    <mat-card
+      *ngFor="let showtime of showtimes(); trackBy: trackByShowtimeId"
+      class="showtime-card"
+      appearance="outlined"
+    >
+      <div class="movie-poster-container">
+        <img
+          [src]="showtime.movie?.posterUrl || '/assets/images/movie-placeholder.svg'"
+          [alt]="(showtime.movie?.title || 'Movie') + ' poster'"
+          class="movie-poster"
+          (error)="onImageError($event)"
+        />
+      </div>
+
+      <mat-card-content class="showtime-content">
+        <mat-card-title class="movie-title">{{
+          showtime.movie?.title || 'Movie Not Found'
+        }}</mat-card-title>
+
+        <div class="showtime-info">
+          <div class="info-row">
+            <mat-icon>schedule</mat-icon>
+            <span>{{ showtime.startTime }} - {{ showtime.endTime }}</span>
+          </div>
+
+          <div class="info-row">
+            <mat-icon>calendar_today</mat-icon>
+            <span>{{ showtime.date | date: 'mediumDate' }}</span>
+          </div>
+
+          <div class="info-row">
+            <mat-icon>attach_money</mat-icon>
+            <span>{{ showtime.formattedPrice }}</span>
+          </div>
+
+          <div class="info-row">
+            <mat-icon>event_seat</mat-icon>
+            <span>{{ showtime.getAvailableSeatsCount }} seats available</span>
+          </div>
+        </div>
+
+        <p class="movie-description">
+          {{ showtime.movie?.description || 'No description available.' }}
+        </p>
+
+        <div class="duration-chip">
+          <mat-chip-set>
+            <mat-chip>{{ showtime.movie?.duration || 0 }} min</mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="showtime-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          class="select-showtime-btn"
+          (click)="onSelectShowtime(showtime.id)"
+          [disabled]="!showtime.getAvailableSeatsCount"
+          [attr.aria-label]="
+            'Book seats for ' + (showtime.movie?.title || 'Movie') + ' at ' + showtime.startTime
+          "
+        >
+          <mat-icon>event_seat</mat-icon>
+          <span *ngIf="showtime.getAvailableSeatsCount">Book Seats</span>
+          <span *ngIf="!showtime.getAvailableSeatsCount">Sold Out</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading() && !errorMessage() && showtimes().length === 0" class="empty-state">
+    <mat-icon class="empty-icon">movie</mat-icon>
+    <h3>No Showtimes Available</h3>
+    <p>There are currently no showtimes available for this room.</p>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </div>
+</div>

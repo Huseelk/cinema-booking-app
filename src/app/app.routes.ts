@@ -11,7 +11,18 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/rooms/room-list.component').then((m) => m.RoomListComponent),
   },
-
+  {
+    path: 'rooms/:roomId/movies',
+    loadComponent: () =>
+      import('./features/movies/movie-list/movie-list.component').then((m) => m.MovieListComponent),
+  },
+  {
+    path: 'rooms/:roomId/movies/:showtimeId/seats',
+    loadComponent: () =>
+      import('./features/rooms/room-selection/room-selection.component').then(
+        (m) => m.RoomSelectionComponent,
+      ),
+  },
   {
     path: 'bookings',
     loadComponent: () =>
@@ -19,7 +30,6 @@ export const routes: Routes = [
         (m) => m.BookingListComponent,
       ),
   },
-
   {
     path: '**',
     redirectTo: '/rooms',
