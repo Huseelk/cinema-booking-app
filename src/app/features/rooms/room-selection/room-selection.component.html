@@ -19,10 +19,6 @@
     <div class="error-text">{{ errorMessage() }}</div>
   </div>
 
-  <div class="warning-message" *ngIf="selectionWarning()">
-    <div class="warning-text">{{ selectionWarning() }}</div>
-  </div>
-
   <div class="loading-container" *ngIf="isLoading()">
     <mat-spinner diameter="50"></mat-spinner>
     <p>Loading seat information...</p>

@@ -10,7 +10,9 @@
   <div *ngIf="errorMessage() && !isLoading()" class="error-container">
     <mat-icon class="error-icon">error_outline</mat-icon>
     <h3>Oops! Something went wrong</h3>
+
     <p>{{ errorMessage() }}</p>
+
     <button mat-raised-button color="primary" (click)="onRetry()">
       <mat-icon>refresh</mat-icon>
       Try Again
@@ -52,6 +54,7 @@
           [attr.aria-label]="'View movies in ' + room.name"
         >
           <mat-icon>movie</mat-icon>
+
           View Movies
         </button>
       </mat-card-actions>
@@ -60,10 +63,14 @@
 
   <div *ngIf="!isLoading() && !errorMessage() && rooms().length === 0" class="empty-state">
     <mat-icon class="empty-icon">meeting_room</mat-icon>
+
     <h3>No Rooms Available</h3>
+
     <p>There are currently no cinema rooms available.</p>
+
     <button mat-raised-button color="primary" (click)="onRetry()">
       <mat-icon>refresh</mat-icon>
+
       Refresh
     </button>
   </div>

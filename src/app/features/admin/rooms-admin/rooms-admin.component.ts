@@ -42,6 +42,7 @@ export class RoomsAdminComponent implements OnInit {
       rows: [8, [Validators.required, Validators.min(1)]],
       seatsPerRow: [10, [Validators.required, Validators.min(1)]],
     });
+
     this.loadRooms();
   }
 

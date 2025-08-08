@@ -3,12 +3,14 @@
     <button mat-icon-button (click)="onBackToRooms()" class="back-button">
       <mat-icon>arrow_back</mat-icon>
     </button>
+
     <div class="header-content">
       <h1 class="page-title">
         <span *ngIf="selectedRoom()">{{ selectedRoom()!.name }}</span>
         <span *ngIf="!selectedRoom()">Room</span>
         Showtimes
       </h1>
+
       <div *ngIf="selectedRoom()" class="room-info">
         <div class="room-color-indicator" [style.background-color]="selectedRoom()!.color"></div>
         <span>{{ selectedRoom()!.rows }}×{{ selectedRoom()!.seatsPerRow }} seating</span>
@@ -25,6 +27,7 @@
     <mat-icon class="error-icon">error_outline</mat-icon>
     <h3>Oops! Something went wrong</h3>
     <p>{{ errorMessage() }}</p>
+
     <button mat-raised-button color="primary" (click)="onRetry()">
       <mat-icon>refresh</mat-icon>
       Try Again
@@ -107,6 +110,7 @@
     <mat-icon class="empty-icon">movie</mat-icon>
     <h3>No Showtimes Available</h3>
     <p>There are currently no showtimes available for this room.</p>
+
     <button mat-raised-button color="primary" (click)="onRetry()">
       <mat-icon>refresh</mat-icon>
       Refresh

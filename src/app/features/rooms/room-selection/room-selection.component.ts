@@ -57,15 +57,10 @@ export class RoomSelectionComponent implements OnInit {
   isLoading = signal(false);
   isBooking = signal(false);
   errorMessage = signal<string | null>(null);
-  selectionWarning = signal<string | null>(null);
 
   bookingForm: FormGroup;
 
   selectedSeats = signal<string[]>([]);
-
-  canSelectMoreSeats = computed(() => {
-    return true;
-  });
 
   totalPrice = computed(() => {
     const showtime = this.showtime();
@@ -165,11 +160,9 @@ export class RoomSelectionComponent implements OnInit {
     if (isCurrentlySelected) {
       const updatedSeats = currentSelectedSeats.filter((id) => id !== seatId);
       this.selectedSeats.set(updatedSeats);
-      this.selectionWarning.set(null);
     } else {
       const updatedSeats = [...currentSelectedSeats, seatId];
       this.selectedSeats.set(updatedSeats);
-      this.selectionWarning.set(null);
     }
   }
 
