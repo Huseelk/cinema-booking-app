@@ -42,6 +42,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'admin/movies',
+    loadComponent: () =>
+      import('./features/admin/movies-admin/movies-admin.component').then(
+        (m) => m.MoviesAdminComponent,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '/rooms',
   },

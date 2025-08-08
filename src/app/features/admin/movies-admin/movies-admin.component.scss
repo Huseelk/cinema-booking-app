@@ -1,0 +1,16 @@
+.movies-admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.movie-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+table {
+  width: 100%;
+}
