@@ -1,26 +1,20 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { RoomService } from '../../core/services/room.service';
-import { Room } from '../../core/models/room.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { Room } from '../../core/models/room.model';
+import { RoomService } from '../../core/services/room.service';
 
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './room-list.component.html',
-  styleUrls: ['./room-list.component.scss']
+  styleUrls: ['./room-list.component.scss'],
 })
 export class RoomListComponent implements OnInit {
   private readonly roomService = inject(RoomService);
@@ -38,16 +32,19 @@ export class RoomListComponent implements OnInit {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.roomService.getRooms().pipe(take(1)).subscribe({
-      next: (rooms) => {
-        this.rooms.set(rooms);
-        this.isLoading.set(false);
-      },
-      error: (error) => {
-        this.errorMessage.set(error.message || 'Failed to load rooms');
-        this.isLoading.set(false);
-      }
-    });
+    this.roomService
+      .getRooms()
+      .pipe(take(1))
+      .subscribe({
+        next: (rooms) => {
+          this.rooms.set(rooms);
+          this.isLoading.set(false);
+        },
+        error: (error) => {
+          this.errorMessage.set(error.message || 'Failed to load rooms');
+          this.isLoading.set(false);
+        },
+      });
   }
 
   onSelectRoom(roomId: number): void {

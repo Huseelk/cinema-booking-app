@@ -22,8 +22,8 @@
       *ngFor="let room of rooms(); trackBy: trackByRoomId"
       class="room-card"
       [class]="'room-card-' + room.color"
-      appearance="outlined">
-
+      appearance="outlined"
+    >
       <div class="room-header">
         <div class="room-color-indicator" [style.background-color]="room.color"></div>
         <mat-card-title class="room-title">{{ room.name }}</mat-card-title>
@@ -49,7 +49,8 @@
           color="primary"
           class="select-room-btn"
           (click)="onSelectRoom(room.id)"
-          [attr.aria-label]="'View movies in ' + room.name">
+          [attr.aria-label]="'View movies in ' + room.name"
+        >
           <mat-icon>movie</mat-icon>
           View Movies
         </button>

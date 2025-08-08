@@ -62,7 +62,9 @@
     margin-top: 24px;
 
     .room-card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
       cursor: pointer;
       border: 2px solid transparent;
 
@@ -73,7 +75,7 @@
 
       &.room-card-red {
         border-color: rgba(244, 67, 54, 0.3);
-        
+
         &:hover {
           border-color: #f44336;
         }
@@ -81,7 +83,7 @@
 
       &.room-card-blue {
         border-color: rgba(33, 150, 243, 0.3);
-        
+
         &:hover {
           border-color: #2196f3;
         }
@@ -89,7 +91,7 @@
 
       &.room-card-green {
         border-color: rgba(76, 175, 80, 0.3);
-        
+
         &:hover {
           border-color: #4caf50;
         }
@@ -184,4 +186,3 @@
     }
   }
 }
-

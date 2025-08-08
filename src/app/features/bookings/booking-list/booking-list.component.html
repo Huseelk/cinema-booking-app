@@ -1,0 +1,38 @@
+<div class="booking-list-container">
+  <h2>My Bookings</h2>
+
+  <div *ngIf="bookings$ | async as bookings; else noBookings">
+    <mat-card *ngFor="let booking of bookings; trackBy: trackByBookingId" class="booking-card">
+      <mat-card-header>
+        <mat-card-title>Booking #{{ booking.id }}</mat-card-title>
+        <mat-card-subtitle>{{ booking.bookingTime | date: 'medium' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Showtime ID:</strong> {{ booking.showtimeId }}</p>
+        <p><strong>Seats:</strong> {{ booking.seatIds.join(', ') }}</p>
+        <p><strong>Total Price:</strong> ${{ booking.totalPrice.toFixed(2) }}</p>
+        <p><strong>User:</strong> {{ booking.userId }}</p>
+
+        <div *ngIf="selectedDetailsId() === booking.id" class="booking-details">
+          <p><strong>Booking Time:</strong> {{ booking.bookingTime }}</p>
+          <p><strong>Seat Count:</strong> {{ booking.seatIds.length }}</p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="onCancel(booking)">Cancel</button>
+        <button mat-button (click)="onToggleDetails(booking.id)">
+          {{ selectedDetailsId() === booking.id ? 'Hide Details' : 'View Details' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noBookings>
+    <div class="no-bookings">
+      <p>You have no bookings yet.</p>
+      <button mat-raised-button color="primary" routerLink="/rooms">Browse Rooms</button>
+    </div>
+  </ng-template>
+</div>
