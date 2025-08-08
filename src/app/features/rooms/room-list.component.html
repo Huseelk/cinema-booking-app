@@ -1,0 +1,69 @@
+<div class="room-list-container">
+  <h1 class="page-title">Cinema Rooms</h1>
+  <p class="page-subtitle">Select a room to view available movies and showtimes</p>
+
+  <div *ngIf="isLoading()" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading rooms...</p>
+  </div>
+
+  <div *ngIf="errorMessage() && !isLoading()" class="error-container">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3>Oops! Something went wrong</h3>
+    <p>{{ errorMessage() }}</p>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Try Again
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading() && !errorMessage()" class="rooms-grid">
+    <mat-card
+      *ngFor="let room of rooms(); trackBy: trackByRoomId"
+      class="room-card"
+      [class]="'room-card-' + room.color"
+      appearance="outlined">
+
+      <div class="room-header">
+        <div class="room-color-indicator" [style.background-color]="room.color"></div>
+        <mat-card-title class="room-title">{{ room.name }}</mat-card-title>
+      </div>
+
+      <mat-card-content class="room-content">
+        <div class="room-info">
+          <div class="info-item">
+            <mat-icon>event_seat</mat-icon>
+            <span>{{ getTotalSeatsCount(room) }} Seats</span>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>grid_view</mat-icon>
+            <span>{{ room.rows }} × {{ room.seatsPerRow }} Layout</span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="room-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          class="select-room-btn"
+          (click)="onSelectRoom(room.id)"
+          [attr.aria-label]="'View movies in ' + room.name">
+          <mat-icon>movie</mat-icon>
+          View Movies
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading() && !errorMessage() && rooms().length === 0" class="empty-state">
+    <mat-icon class="empty-icon">meeting_room</mat-icon>
+    <h3>No Rooms Available</h3>
+    <p>There are currently no cinema rooms available.</p>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </div>
+</div>
