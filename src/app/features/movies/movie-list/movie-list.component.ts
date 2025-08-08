@@ -137,7 +137,9 @@ export class MovieListComponent implements OnInit {
 
   getAvailableSeatsCount(showtime: ShowtimeWithMovie): number {
     const room = this.selectedRoom();
+
     if (!room) return 0;
+
     return room.seats.length - showtime.bookedSeats.length;
   }
 
