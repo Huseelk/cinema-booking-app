@@ -35,6 +35,13 @@ export const routes: Routes = [
     loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent),
   },
   {
+    path: 'admin/rooms',
+    loadComponent: () =>
+      import('./features/admin/rooms-admin/rooms-admin.component').then(
+        (m) => m.RoomsAdminComponent,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '/rooms',
   },

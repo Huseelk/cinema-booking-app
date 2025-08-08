@@ -1,0 +1,64 @@
+<div class="rooms-admin-container">
+  <h2>Rooms Management</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="room-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Color</mat-label>
+      <input matInput formControlName="color" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Rows</mat-label>
+      <input matInput type="number" formControlName="rows" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Seats Per Row</mat-label>
+      <input matInput type="number" formControlName="seatsPerRow" required />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      {{ selectedRoom ? 'Update' : 'Create' }}
+    </button>
+    <button mat-button type="button" (click)="resetForm()" *ngIf="selectedRoom">Cancel</button>
+  </form>
+
+  <table mat-table [dataSource]="rooms()" class="mat-elevation-z1">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let room">{{ room.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let room">{{ room.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef>Color</th>
+      <td mat-cell *matCellDef="let room">{{ room.color }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rows">
+      <th mat-header-cell *matHeaderCellDef>Rows</th>
+      <td mat-cell *matCellDef="let room">{{ room.rows }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="seatsPerRow">
+      <th mat-header-cell *matHeaderCellDef>Seats/Row</th>
+      <td mat-cell *matCellDef="let room">{{ room.seatsPerRow }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let room">
+        <button mat-button color="primary" (click)="onEdit(room)">Edit</button>
+        <button mat-button color="warn" (click)="onDelete(room)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
