@@ -1267,10 +1267,7 @@
       "endTime": "14:30",
       "date": "2024-01-20",
       "price": 15,
-      "bookedSeats": [
-        "A5",
-        "A6"
-      ]
+      "bookedSeats": ["A5", "A6"]
     },
     {
       "id": "2",
@@ -1290,11 +1287,7 @@
       "endTime": "19:20",
       "date": "2024-01-20",
       "price": 15,
-      "bookedSeats": [
-        "C3",
-        "C4",
-        "C5"
-      ]
+      "bookedSeats": ["C3", "C4", "C5"]
     },
     {
       "id": "4",
@@ -1314,13 +1307,7 @@
       "endTime": "14:30",
       "date": "2024-01-20",
       "price": 15,
-      "bookedSeats": [
-        "B2",
-        "B3",
-        "H6",
-        "H7",
-        "E7"
-      ]
+      "bookedSeats": ["B2", "B3", "H6", "H7", "E7"]
     },
     {
       "id": "6",
@@ -1370,10 +1357,7 @@
       "endTime": "17:15",
       "date": "2024-01-20",
       "price": 18,
-      "bookedSeats": [
-        "E5",
-        "E6"
-      ]
+      "bookedSeats": ["E5", "E6"]
     },
     {
       "id": "11",
@@ -1400,10 +1384,7 @@
     {
       "id": "1",
       "showtimeId": 1,
-      "seatIds": [
-        "A5",
-        "A6"
-      ],
+      "seatIds": ["A5", "A6"],
       "userId": "user123",
       "bookingTime": "2024-01-15T14:30:00.000Z",
       "totalPrice": 30
@@ -1411,11 +1392,7 @@
     {
       "id": "2",
       "showtimeId": 3,
-      "seatIds": [
-        "C3",
-        "C4",
-        "C5"
-      ],
+      "seatIds": ["C3", "C4", "C5"],
       "userId": "user456",
       "bookingTime": "2024-01-16T19:45:00.000Z",
       "totalPrice": 45
@@ -1423,10 +1400,7 @@
     {
       "id": "3",
       "showtimeId": 5,
-      "seatIds": [
-        "B2",
-        "B3"
-      ],
+      "seatIds": ["B2", "B3"],
       "userId": "user789",
       "bookingTime": "2024-01-17T16:20:00.000Z",
       "totalPrice": 30
@@ -1434,10 +1408,7 @@
     {
       "id": "4",
       "showtimeId": 10,
-      "seatIds": [
-        "E5",
-        "E6"
-      ],
+      "seatIds": ["E5", "E6"],
       "userId": "user101",
       "bookingTime": "2024-01-18T10:15:00.000Z",
       "totalPrice": 36
@@ -1445,10 +1416,7 @@
     {
       "id": "f3f4",
       "showtimeId": 5,
-      "seatIds": [
-        "H6",
-        "H7"
-      ],
+      "seatIds": ["H6", "H7"],
       "userId": "user123",
       "bookingTime": "2025-08-07T19:46:39.002Z",
       "totalPrice": 30
@@ -1456,9 +1424,7 @@
     {
       "id": "ea0d",
       "showtimeId": 5,
-      "seatIds": [
-        "E7"
-      ],
+      "seatIds": ["E7"],
       "userId": "user123",
       "bookingTime": "2025-08-07T19:51:15.537Z",
       "totalPrice": 15

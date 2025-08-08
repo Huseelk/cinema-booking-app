@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Room, Seat } from '../models/room.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoomService {
   private readonly apiUrl = 'http://localhost:3000/rooms';
@@ -15,7 +15,7 @@ export class RoomService {
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl).pipe(
       map((rooms: Room[]) => rooms || []),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
 
@@ -31,26 +31,37 @@ export class RoomService {
         }
         return room;
       }),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
 
-  createRoom(room: { name: string; color: string; rows: number; seatsPerRow: number; seats?: Seat[] }): Observable<Room> {
+  createRoom(room: {
+    name: string;
+    color: string;
+    rows: number;
+    seatsPerRow: number;
+    seats?: Seat[];
+  }): Observable<Room> {
     const payload: Omit<Room, 'id'> = {
       name: room.name.trim(),
       color: room.color.trim(),
       rows: room.rows,
       seatsPerRow: room.seatsPerRow,
-      seats: room.seats ?? []
+      seats: room.seats ?? [],
     };
 
-    if (!payload.name || !payload.color || typeof payload.rows !== 'number' || payload.rows <= 0 || typeof payload.seatsPerRow !== 'number' || payload.seatsPerRow <= 0) {
+    if (
+      !payload.name ||
+      !payload.color ||
+      typeof payload.rows !== 'number' ||
+      payload.rows <= 0 ||
+      typeof payload.seatsPerRow !== 'number' ||
+      payload.seatsPerRow <= 0
+    ) {
       return throwError(() => new Error('Invalid room data provided'));
     }
 
-    return this.http.post<Room>(this.apiUrl, payload).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post<Room>(this.apiUrl, payload).pipe(catchError(this.handleError));
   }
 
   updateRoom(room: Room): Observable<Room> {
@@ -61,12 +72,12 @@ export class RoomService {
     const payload: Room = {
       ...room,
       name: room.name.trim(),
-      color: room.color.trim()
+      color: room.color.trim(),
     };
 
-    return this.http.put<Room>(`${this.apiUrl}/${room.id}`, payload).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .put<Room>(`${this.apiUrl}/${room.id}`, payload)
+      .pipe(catchError(this.handleError));
   }
 
   deleteRoom(id: number): Observable<void> {
@@ -74,9 +85,7 @@ export class RoomService {
       return throwError(() => new Error('Invalid room ID provided'));
     }
 
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
